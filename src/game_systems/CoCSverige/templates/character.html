@@ -1,74 +1,83 @@
 <div>
-    <table>
-        <tr>
-            <td>Egenskap</td>
-            <td>Värde</td>
-        </tr>
-        {% if STY is defined %}
-        <tr>
-            <td>STY</td>
-            <td>{{ STY }}</td>
-        </tr>
-        {% endif %}
-        {% if FYS is defined %}
-        <tr>
-            <td>FYS</td>
-            <td>{{ FYS }}</td>
-        </tr>
-        {% endif %}
-        {% if STO is defined %}
-        <tr>
-            <td>STO</td>
-            <td>{{ STO }}</td>
-        </tr>
-        {% endif %}
-        {% if SMI is defined %}
-        <tr>
-            <td>SMI</td>
-            <td>{{ SMI }}</td>
-        </tr>
-        {% endif %}
-        {% if KAR is defined %}
-        <tr>
-            <td>KAR</td>
-            <td>{{ KAR }}</td>
-        </tr>
-        {% endif %}
-        {% if INT is defined %}
-        <tr>
-            <td>INT</td>
-            <td>{{ INT }}</td>
-        </tr>
-        {% endif %}
-        {% if VST is defined %}
-        <tr>
-            <td>VST</td>
-            <td>{{ VST }}</td>
-        </tr>
-        {% endif %}
-        {% if UTB is defined %}
-        <tr>
-            <td>UTB</td>
-            <td>{{ UTB }}</td>
-        </tr>
-        {% endif %}
-    </table>
-
-    <p>
-        {% if KP is defined %}<b>KP: </b>{{ KP }}, {% endif %}
-        {% if Skadebonus is defined %}<b>Skadebonus: </b>{{ Skadebonus }}{% endif %}
-    </p>
-    <p>
-        {% if Kroppsbyggnad is defined %}<b>Kroppsbyggnad: </b>{{ Kroppsbyggnad }}, {% endif %}
-        {% if Förflyttning is defined %}<b>Förflyttning: </b>{{ Förflyttning }}{% endif %}
-    </p>
-    {% if Färdigheter is defined %}
-    <b>Färdigheter:</b>
-    <ul>
-        {% for instance in Färdigheter %}
-        <li>{{ instance }}: {{ Färdigheter.get(instance) }}%</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="CharacterStats six columns">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Egenskap</td>
+                        <td>Värde</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if STY is defined %}
+                    <tr>
+                        <td>STY</td>
+                        <td>{{ STY }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if FYS is defined %}
+                    <tr>
+                        <td>FYS</td>
+                        <td>{{ FYS }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if STO is defined %}
+                    <tr>
+                        <td>STO</td>
+                        <td>{{ STO }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if SMI is defined %}
+                    <tr>
+                        <td>SMI</td>
+                        <td>{{ SMI }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if KAR is defined %}
+                    <tr>
+                        <td>KAR</td>
+                        <td>{{ KAR }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if INT is defined %}
+                    <tr>
+                        <td>INT</td>
+                        <td>{{ INT }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if VST is defined %}
+                    <tr>
+                        <td>VST</td>
+                        <td>{{ VST }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if UTB is defined %}
+                    <tr>
+                        <td>UTB</td>
+                        <td>{{ UTB }}</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="six columns CharacterTraits">
+            <p>
+                {% if KP is defined %}<b>KP: </b>{{ KP }}, {% endif %}
+                {% if Skadebonus is defined %}<b>Skadebonus: </b>{{ Skadebonus }}{% endif %}
+            </p>
+            <p>
+                {% if Kroppsbyggnad is defined %}<b>Kroppsbyggnad: </b>{{ Kroppsbyggnad }}, {% endif %}
+                {% if Förflyttning is defined %}<b>Förflyttning: </b>{{ Förflyttning }}{% endif %}
+            </p>
+            {% if Färdigheter is defined %}
+            <b>Färdigheter:</b>
+            <ul>
+                {% for instance in Färdigheter %}
+                <li>{{ instance }}: {{ Färdigheter.get(instance) }}%</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
     {% endif %}
     {% if Biografi is defined %}
     {{ Biografi }}

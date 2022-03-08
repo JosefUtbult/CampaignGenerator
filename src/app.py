@@ -56,7 +56,7 @@ def main():
 
     system = get_systems()[args.gamesystem]
     with open(args.inputfile) as file:
-        res = markdown(file.read(), extensions=[mp.CampainGeneratorExtension(system), 'tables'])
+        res = markdown(file.read(), extensions=[mp.CampainGeneratorExtension(system), 'tables', 'toc'])
 
     if args.html:
         with open((args.inputfile + '.html') if not args.outputfile else args.outputfile, 'w') as file:

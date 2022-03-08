@@ -1,10 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
 <meta charset="utf-8"/>
-<head>
-    <!-- Skeleton style framework. Check them out on http://getskeleton.com/ -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton-framework/1.0.8/skeleton.css">
-</head>
-<body>
-{{ content }}
-</body>
+<html lang="en">
+    <head>
+        <!-- Skeleton style framework. Check them out on http://getskeleton.com/ -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton-framework/1.0.8/skeleton.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Estonia&family=Inconsolata:wght@300;400;500;700&family=Special+Elite&family=Tangerine&display=swap" rel="stylesheet">
+
+        <style>
+            body {
+                font-family: 'inconsolata', monospace;
+            }
+            h1, h2, h3, h4, h5 {
+                font-family: 'Estonia', cursive;
+                text-align: center;
+            }
+
+            li {
+                list-style: circle inside;
+            }
+
+            .toc {
+                width: 100%;
+            }
+
+            .toc ul li {
+                list-style-type: none;
+
+            }
+
+            .toc > ul {
+                columns: 2;
+                column-fill: balance;
+                font-size: large;
+
+            }
+            .toc > ul > li {
+                margin-left: 20%;
+                margin-right: 20%;
+                margin-bottom: 4px;
+                list-style: decimal inside !important;
+            }
+
+            a {
+                color: #252525;
+            }
+
+            a:link {
+                color: #252525;
+            }
+
+            a:visited {
+                color: #252525;
+            }
+
+            a:focus {
+                color: #252525;
+            }
+
+            a:hover {
+                color: #252525;
+            }
+
+            a:active {
+                color: #252525;
+            }
+
+            img {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+
+                border-style: solid;
+                border-radius: 5px;
+                border-color: rgba(0, 0, 0, 0.2);
+                box-shadow: 0 6px 8px 0;
+            }
+
+            table {
+                line-height: 1px;
+                border: 1px solid #E1E1E1;
+            }
+
+            tbody tr:nth-child(odd) {background-color: #eaeaea;}
+            tbody tr:nth-child(event) {background-color: #efefef;}
+            thead tr {background-color: #bebebe;}
+
+            .centered {
+                text-align: center;
+                margin-top: 10%;
+                margin-bottom: 10%;
+                padding: 30px;
+            }
+
+            .describe {
+                border-left: rgba(34, 34, 34, 0.62);
+                border-right: rgba(34, 34, 34, 0.62);
+                border-left-style: solid;
+                border-right-style: solid;
+                border-left-width: thin;
+                border-right-width: thin;
+
+                font-weight: lighter;
+            }
+
+            .letter {
+                background-color: #ebe9e4;
+                border-style: solid;
+                border-color: #dad8d2;
+                box-shadow: 0 6px 8px 0;
+
+                color: #000114;
+                font-family: 'Estonia', cursive;
+                font-size: xx-large;
+            }
+
+            .book {
+                background-color: #ebe9e4;
+                border-style: solid;
+                border-color: #dad8d2;
+                box-shadow: 0 6px 8px 0;
+
+                font-family: 'Special Elite', cursive;
+            }
+
+            .book h5 {
+                font-family: 'Special Elite', cursive;
+            }
+
+            .letter > p {
+                margin-bottom: 4px;
+            }
+
+            .CharacterStats {
+                padding: 2%;
+            }
+
+            .CharacterStats table {
+                width: 100%;
+            }
+            .CharacterStats td {
+                text-align: center;
+            }
+
+            .CharacterTraits {
+                padding: 2%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="one columns"></div>
+            <div class="ten columns">
+                {{ content }}
+            </div>
+        </div>
+    </body>
+</html>

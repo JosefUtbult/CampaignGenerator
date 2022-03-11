@@ -2,14 +2,22 @@
     <div class="two columns"></div>
     <div class="eight columns book centered">
         <div style="text-align: left">
-            {% if Title is defined %}
-            <h5>{{ Title }}</h5>
+            {% if title is defined %}
+            <h5>{{ title }}</h5>
             {% endif %}
-            <p>{{ Content }}{{ content }}</p>
+            {% if content is defined %}
+            {% if content is string %}
+            <p>{{ content }}</p>
+            {% else %}
+            {% for instance in content %}
+            <p>{{ instance }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endif %}
         </div>
-        {% if Author is defined %}
+        {% if author is defined %}
         <div style="text-align: right">
-            <p>{{Author}}</p>
+            <p>{{ author }}</p>
         </div>
         {% endif %}
     </div>

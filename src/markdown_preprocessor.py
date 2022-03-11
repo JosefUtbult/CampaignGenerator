@@ -1,5 +1,7 @@
+import json
 import xml.etree.ElementTree as etree
 
+import markdown as markdown
 from markdown.treeprocessors import Treeprocessor
 from markdown.blockprocessors import BlockProcessor
 from markdown.postprocessors import Postprocessor
@@ -36,7 +38,9 @@ class HeadingReferences(Treeprocessor):
 class MarkdownPreprocessor(BlockProcessor):
     RE_CHARACTER = r''
     # Check for three exclamation marks and a block specifier
-    RE_FENCE = r'^ *!{3,} (\S*)[\n]((.|\n)*)!{3,}'
+    RE_FENCE = r'^ *`{3,}(\S*)[\n]((.|\n)*)`{3,}'
+    RE_CHECK_JSON = r'^ *`{3,}[\S]*\s*(\{)'
+    RE_FIND_STRING = r'"([^"]*)"'
 
     def __init__(self, parser, game_system_class):
         super().__init__(parser)
@@ -55,11 +59,17 @@ class MarkdownPreprocessor(BlockProcessor):
         if res and len(res.groups()) > 2:
             type = res.group(1)
             content = res.group(2)
-            try:
-                parsed_content = self.game_system_class.function_map[type.lower()](content)
-            except Exception as e:
-                parsed_content = f'<p style="color: red"><b>Unable to parse content: {e}</b></p>'
-
+            if type.lower() in self.game_system_class.function_map:
+                try:
+                    if re.match(self.RE_CHECK_JSON, block):
+                        parsed_content = json.loads(content.replace('\n', ''))
+                    else:
+                        parsed_content = {"content": content}
+                    parsed_content = self.game_system_class.function_map[type.lower()](parsed_content)
+                except Exception as e:
+                    parsed_content = f'<p style="color: red"><b>Unable to parse content: {e}</b></p>'
+            else:
+                parsed_content = parse_markdown(block)
             child = etree.fromstring(parsed_content)
             parent.append(child)
 
@@ -81,5 +91,16 @@ class CampainGeneratorExtension(Extension):
 
     def extendMarkdown(self, md):
         md.treeprocessors.register(HeadingReferences(md.parser), 'HeadingReferences', 100)
-        md.parser.blockprocessors.register(MarkdownPreprocessor(md.parser, self.game_system_class), 'MarkdownPreprocessor', 101)
+        md.parser.blockprocessors.register(MarkdownPreprocessor(md.parser, self.game_system_class),
+                                           'MarkdownPreprocessor', 101)
         md.postprocessors.register(MarkdownPostprocessor(self.game_system_class), 'MarkdownPostProcessor', float('inf'))
+
+
+system = None
+
+
+def parse_markdown(raw, _system=None):
+    global system
+    if _system:
+        system = _system
+    return markdown.markdown(raw, extensions=[CampainGeneratorExtension(system), 'tables', 'toc'])

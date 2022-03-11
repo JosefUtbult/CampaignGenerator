@@ -76,10 +76,16 @@
                 <li>{{ instance }}: {{ Färdigheter.get(instance) }}%</li>
                 {% endfor %}
             </ul>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
     {% if Biografi is defined %}
-    {{ Biografi }}
+    {% if Biografi is string %}
+    <p>{{ Biografi }}</p>
+    {% else %}
+    {% for instance in Biografi %}
+    <p>{{ instance }}</p>
+    {% endfor %}
+    {% endif %}
     {% endif %}
 </div>
